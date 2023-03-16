@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 const suggestions = [
   'How do I get started with Next.js?',
@@ -13,6 +13,14 @@ export default function SearchCard() {
   const [search, setSearch] = useState<string>('')
   const [message, setMessage] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
+
+  const messageRef = useRef<HTMLDivElement>(null)
+
+  const handleScroll = () => {
+    if (messageRef.current) {
+      messageRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
 
   const handleSuggestions = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const suggestion = event.currentTarget.name
@@ -52,6 +60,7 @@ export default function SearchCard() {
       done = doneReading
       const chunkValue = decoder.decode(value)
       setMessage((prev) => prev + chunkValue)
+      handleScroll()
     }
 
     setLoading(false)
@@ -128,7 +137,10 @@ export default function SearchCard() {
           </div>
         )}
 
-        <div className='border-t border-gray-300 pt-2'>
+        <div
+          className='border-t border-gray-300 pt-2'
+          ref={messageRef}
+        >
           <p className='text-zinc-300'>Powered by OpenAI.</p>
         </div>
       </div>
