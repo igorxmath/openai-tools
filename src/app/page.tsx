@@ -1,5 +1,6 @@
 'use client'
 import { useState, useRef } from 'react'
+import ReactMarkdown from 'react-markdown'
 
 const suggestions = [
   'How do I get started with Next.js?',
@@ -133,7 +134,9 @@ export default function SearchCard() {
               <span className='h-3 w-3 rounded-full bg-green-500'></span>
             </div>
 
-            <p className='text-justify'>{message}</p>
+            <div className='prose justify-center dark:prose-invert'>
+              <ReactMarkdown>{message}</ReactMarkdown>
+            </div>
           </div>
         )}
 
