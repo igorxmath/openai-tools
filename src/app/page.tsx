@@ -1,6 +1,8 @@
 'use client'
 import { useState, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const suggestions = [
   'How do I get started with Next.js?',
@@ -100,6 +102,11 @@ export default function SearchCard() {
             placeholder='How can I help?'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleClick(search)
+              }
+            }}
             required
           />
           <button
@@ -134,8 +141,29 @@ export default function SearchCard() {
               <span className='h-3 w-3 rounded-full bg-green-500'></span>
             </div>
 
-            <div className='prose justify-center dark:prose-invert'>
-              <ReactMarkdown>{message}</ReactMarkdown>
+            <div className='prose dark:prose-invert'>
+              <ReactMarkdown
+                components={{
+                  code({ inline, className, children, ...props }: any) {
+                    const match = /language-(\w+)/.exec(className || '')
+                    return !inline && match ? (
+                      <SyntaxHighlighter
+                        style={vscDarkPlus}
+                        customStyle={{ background: 'transparent', padding: 0 }}
+                        language={match[1]}
+                        wrapLongLines={true}
+                        {...props}
+                      >
+                        {String(children).replace(/\n$/, '')}
+                      </SyntaxHighlighter>
+                    ) : (
+                      <code>{children}</code>
+                    )
+                  },
+                }}
+              >
+                {message}
+              </ReactMarkdown>
             </div>
           </div>
         )}
