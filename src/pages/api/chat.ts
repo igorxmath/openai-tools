@@ -13,6 +13,9 @@ export default async function handler(request: Request): Promise<NextResponse> {
   if (!query) {
     return new NextResponse('No query provided', { status: 400 })
   }
+  if (query.length > 1024) {
+    return new NextResponse('Query too long', { status: 400 })
+  }
 
   const messages: ChatGPTMessage[] = [{ role: 'user', content: query }]
 

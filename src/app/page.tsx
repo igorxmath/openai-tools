@@ -144,6 +144,7 @@ export default function SearchCard() {
             <div className='prose dark:prose-invert'>
               <ReactMarkdown
                 components={{
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   code({ inline, className, children, ...props }: any) {
                     const match = /language-(\w+)/.exec(className || '')
                     return !inline && match ? (
