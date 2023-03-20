@@ -12,6 +12,13 @@ const suggestions = [
   'How do I use React?',
 ]
 
+export interface CodeProps {
+  inline?: boolean
+  className?: string
+  children: React.ReactNode
+  [key: string]: unknown
+}
+
 export default function SearchCard() {
   const [search, setSearch] = useState<string>('')
   const [message, setMessage] = useState<string>('')
@@ -71,11 +78,11 @@ export default function SearchCard() {
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 lg:px-8'>
-      <h1 className='mb-4 text-3xl font-bold sm:text-5xl'>Get instant tips</h1>
+      <h1 className='mt-4 mb-4 text-4xl font-bold sm:text-6xl'>Get instant tips</h1>
       <p className='mb-4 text-center text-base text-zinc-300 sm:text-lg'>
         Type your question below and let our AI supplement your knowledge
       </p>
-      <div className='w-full max-w-2xl rounded-lg border border-zinc-800 bg-zinc-800 p-4 shadow-2xl'>
+      <div className='mb-4 w-full max-w-2xl rounded-lg border border-zinc-800 bg-zinc-800 p-4 shadow-2xl'>
         <div className='relative mb-4'>
           <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
             <svg
@@ -144,8 +151,7 @@ export default function SearchCard() {
             <div className='prose dark:prose-invert'>
               <ReactMarkdown
                 components={{
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  code({ inline, className, children, ...props }: any) {
+                  code({ inline, className, children, ...props }: CodeProps) {
                     const match = /language-(\w+)/.exec(className || '')
                     return !inline && match ? (
                       <SyntaxHighlighter
