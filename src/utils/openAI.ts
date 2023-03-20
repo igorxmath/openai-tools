@@ -41,8 +41,7 @@ export async function OpenAIStream(payload: ChatGPTRequest) {
       }
 
       const parser = createParser(onParse)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      for await (const chunk of res.body as any) {
+      for await (const chunk of res.body as ReadableStream & AsyncIterable<Uint8Array>) {
         parser.feed(decoder.decode(chunk))
       }
     },
