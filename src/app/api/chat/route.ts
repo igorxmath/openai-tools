@@ -4,7 +4,7 @@ import { OpenAIStream } from '@/utils/openAI'
 
 export const runtime = 'edge'
 
-export default async function handler(request: Request): Promise<NextResponse> {
+export async function POST(request: Request): Promise<NextResponse> {
   if (!process.env.OPENAI_API_KEY || !process.env.OPENAI_ENDPOINT) {
     return new NextResponse('Server error', { status: 500 })
   }
