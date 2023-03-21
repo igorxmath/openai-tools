@@ -1,4 +1,5 @@
 'use client'
+import GitHub from '@/components/icons/github'
 import { useState, useRef } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
@@ -78,6 +79,14 @@ export default function SearchCard() {
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 lg:px-8'>
+      <a
+        href='https://github.com/igorxmath/openai-tools/'
+        target='_blank'
+        rel='noopener noreferrer'
+        className='absolute bottom-4 right-4'
+      >
+        <GitHub className='shadow-white transition-all duration-300 hover:scale-105' />
+      </a>
       <h1 className='mt-4 mb-4 text-4xl font-bold sm:text-6xl'>Get instant tips</h1>
       <p className='mb-4 text-center text-base text-zinc-300 sm:text-lg'>
         Type your question below and let our AI supplement your knowledge
