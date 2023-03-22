@@ -177,7 +177,7 @@ export default function SearchCard() {
         )}
 
         <div
-          className='border-t flex border-gray-300 pt-2'
+          className='flex border-t border-gray-300 pt-2'
           ref={messageRef}
         >
           <p className='text-zinc-300'>Powered by OpenAI.</p>
