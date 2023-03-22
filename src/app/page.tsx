@@ -79,14 +79,6 @@ export default function SearchCard() {
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 lg:px-8'>
-      <a
-        href='https://github.com/igorxmath/openai-tools/'
-        target='_blank'
-        rel='noopener noreferrer'
-        className='absolute bottom-4 right-4'
-      >
-        <GitHub className='shadow-white transition-all duration-300 hover:scale-105' />
-      </a>
       <h1 className='mt-4 mb-4 text-4xl font-bold sm:text-6xl'>Get instant tips</h1>
       <p className='mb-4 text-center text-base text-zinc-300 sm:text-lg'>
         Type your question below and let our AI supplement your knowledge
@@ -185,10 +177,18 @@ export default function SearchCard() {
         )}
 
         <div
-          className='border-t border-gray-300 pt-2'
+          className='border-t flex border-gray-300 pt-2'
           ref={messageRef}
         >
           <p className='text-zinc-300'>Powered by OpenAI.</p>
+          <a
+            href='https://github.com/igorxmath/openai-tools/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className='ml-auto'
+          >
+            <GitHub className='shadow-white transition-all duration-300 hover:scale-105' />
+          </a>
         </div>
       </div>
     </div>
