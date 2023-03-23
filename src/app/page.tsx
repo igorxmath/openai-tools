@@ -65,8 +65,9 @@ export default function SearchCard() {
     if (!res.ok) {
       console.log(res.headers.get('X-RateLimit-Remaining'))
       if (res.headers.get('X-RateLimit-Remaining')) {
+        const remaining = res.headers.get('X-RateLimit-Reset')
         const remainingSeconds =
-          (res.headers.get('X-RateLimit-Reset') as any) / 1000 - Math.floor(Date.now() / 1000)
+          (remaining ? parseInt(remaining, 10) : 0) / 1000 - Math.floor(Date.now() / 1000)
         setRemainingTime(remainingSeconds)
       }
       setMessage(`Something went wrong. ${await res.text()}`)
@@ -192,8 +193,8 @@ export default function SearchCard() {
 
               {remainingTime > 0 && (
                 <p>
-                  Please try again in{' '}
-                  {Math.ceil(remainingTime / 60)} minute(s) and {remainingTime % 60} second(s).
+                  Please try again in {Math.ceil(remainingTime / 60)} minute(s) and{' '}
+                  {remainingTime % 60} second(s).
                 </p>
               )}
             </div>
