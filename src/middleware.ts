@@ -16,12 +16,21 @@ export default async function middleware(
 ): Promise<Response | undefined> {
   const ip = request.ip ?? '127.0.0.1'
 
-  const { success, pending } = await ratelimit.limit(`ratelimit_middleware_${ip}`)
+  const { success, pending, limit, reset, remaining } = await ratelimit.limit(
+    `ratelimit_middleware_${ip}`,
+  )
   event.waitUntil(pending)
 
   return success
     ? NextResponse.next()
-    : new NextResponse('Too many requests in a given amount of time', { status: 429 })
+    : new NextResponse('Too many requests in a given amount of time.', {
+        status: 429,
+        headers: {
+          'X-RateLimit-Limit': limit.toString(),
+          'X-RateLimit-Remaining': remaining.toString(),
+          'X-RateLimit-Reset': reset.toString(),
+        },
+      })
 }
 
 export const config = {

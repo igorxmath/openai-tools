@@ -1,6 +1,6 @@
 'use client'
 import GitHub from '@/components/icons/github'
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -24,6 +24,17 @@ export default function SearchCard() {
   const [search, setSearch] = useState<string>('')
   const [message, setMessage] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
+  const [remainingTime, setRemainingTime] = useState<number>(0)
+
+  useEffect(() => {
+    if (remainingTime > 0) {
+      const timerId = setInterval(() => {
+        setRemainingTime((prevRemainingTime) => prevRemainingTime - 1)
+      }, 1000)
+
+      return () => clearInterval(timerId)
+    }
+  }, [remainingTime])
 
   const messageRef = useRef<HTMLDivElement>(null)
 
@@ -52,6 +63,12 @@ export default function SearchCard() {
     })
 
     if (!res.ok) {
+      console.log(res.headers.get('X-RateLimit-Remaining'))
+      if (res.headers.get('X-RateLimit-Remaining')) {
+        const remainingSeconds =
+          (res.headers.get('X-RateLimit-Reset') as any) / 1000 - Math.floor(Date.now() / 1000)
+        setRemainingTime(remainingSeconds)
+      }
       setMessage(`Something went wrong. ${await res.text()}`)
       setLoading(false)
       return
@@ -121,7 +138,7 @@ export default function SearchCard() {
             type='submit'
             className='absolute right-2.5 bottom-2.5 rounded-lg bg-zinc-200 px-4 py-2 text-sm font-bold text-zinc-900 shadow-white transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4'
             onClick={() => handleClick(search)}
-            disabled={loading}
+            disabled={loading || remainingTime > 0}
           >
             Search
           </button>
@@ -172,6 +189,13 @@ export default function SearchCard() {
               >
                 {message}
               </ReactMarkdown>
+
+              {remainingTime > 0 && (
+                <p>
+                  Please try again in{' '}
+                  {Math.ceil(remainingTime / 60)} minute(s) and {remainingTime % 60} second(s).
+                </p>
+              )}
             </div>
           </div>
         )}
