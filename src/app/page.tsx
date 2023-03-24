@@ -23,8 +23,11 @@ export interface CodeProps {
 export default function SearchCard() {
   const [search, setSearch] = useState<string>('')
   const [message, setMessage] = useState<string>('')
+  const [copyState, setCopyState] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [remainingTime, setRemainingTime] = useState<number>(0)
+
+  const messageRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (remainingTime > 0) {
@@ -36,7 +39,14 @@ export default function SearchCard() {
     }
   }, [remainingTime])
 
-  const messageRef = useRef<HTMLDivElement>(null)
+  const handleCopy = () => {
+    navigator.clipboard.writeText(message).then(() => {
+      setCopyState(true)
+      setTimeout(() => {
+        setCopyState(false)
+      }, 3000)
+    })
+  }
 
   const handleScroll = () => {
     if (messageRef.current) {
@@ -161,10 +171,40 @@ export default function SearchCard() {
           </div>
         ) : (
           <div className='mb-4 rounded-lg bg-zinc-900 p-4 shadow-md'>
-            <div className={loading ? 'loading mb-2 flex space-x-2' : 'mb-2 flex space-x-2'}>
-              <span className='h-3 w-3 rounded-full bg-red-500'></span>
-              <span className='h-3 w-3 rounded-full bg-yellow-500'></span>
-              <span className='h-3 w-3 rounded-full bg-green-500'></span>
+            <div className='mb-2 flex'>
+              <div className={`${loading && 'loading'} flex space-x-2`}>
+                <span className='h-3 w-3 rounded-full bg-red-500'></span>
+                <span className='h-3 w-3 rounded-full bg-yellow-500'></span>
+                <span className='h-3 w-3 rounded-full bg-green-500'></span>
+              </div>
+
+              {!loading && (
+                <div className='group ml-auto'>
+                  <button
+                    onClick={handleCopy}
+                    disabled={loading || copyState}
+                    className='shadow-white transition-all duration-300 hover:scale-105'
+                  >
+                    <svg
+                      xmlns='http://www.w3.org/2000/svg'
+                      className='pointer-events-none h-6 w-6'
+                      fill='none'
+                      viewBox='0 0 24 24'
+                      stroke='currentColor'
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        d='M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z'
+                      />
+                    </svg>
+                  </button>
+                  <span className='absolute ml-1 scale-0 rounded bg-zinc-800 p-2 text-xs text-zinc-300 transition-all duration-300 group-hover:scale-100'>
+                    {copyState ? 'Copied!' : 'Copy'}
+                  </span>
+                </div>
+              )}
             </div>
 
             <div className='prose dark:prose-invert'>
