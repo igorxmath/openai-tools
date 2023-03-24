@@ -108,7 +108,7 @@ export default function SearchCard() {
 
   return (
     <div className='flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 lg:px-8'>
-      <Logo className='shadow-white transition-all duration-300 hover:scale-105' />
+      <Logo className='mt-4 shadow-white transition-all duration-300 hover:scale-105' />
       <h1 className='mt-4 mb-4 text-4xl font-bold sm:text-6xl'>Get instant tips</h1>
       <p className='mb-4 text-center text-base text-zinc-300 sm:text-lg'>
         Type your question below and let our AI supplement your knowledge
