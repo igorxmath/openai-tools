@@ -1,4 +1,4 @@
-const Logo = (props: { [key: string]: unknown }) => {
+export const Logo = (props: { [key: string]: unknown }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -30,5 +30,3 @@ const Logo = (props: { [key: string]: unknown }) => {
     </svg>
   )
 }
-
-export default Logo
