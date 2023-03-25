@@ -12,8 +12,10 @@ export default function HomePage() {
   return (
     <div className='flex min-h-screen flex-col'>
       <main className='container mx-auto flex flex-1 flex-col items-center justify-center p-4'>
-        <Header />
-        <PromptCard suggestions={suggestions} />
+        <div className='w-full max-w-2xl'>
+          <Header />
+          <PromptCard suggestions={suggestions} />
+        </div>
       </main>
     </div>
   )

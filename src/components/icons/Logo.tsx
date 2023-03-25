@@ -2,8 +2,9 @@ export const Logo = (props: { [key: string]: unknown }) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
-      width={132.583}
-      height={95.93}
+      width={132.583 * 1.5}
+      height={95.93 * 1.5}
+      viewBox='0 0 132.583 95.93'
       fill='none'
       {...props}
     >

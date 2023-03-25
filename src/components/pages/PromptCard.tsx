@@ -89,7 +89,7 @@ export function PromptCard({ suggestions }: { suggestions: string[] }) {
   }
 
   return (
-    <div className='mb-4 w-full max-w-2xl rounded-lg border border-zinc-800 bg-zinc-800 p-4 shadow-2xl'>
+    <div className='mb-4 rounded-lg border border-zinc-800 bg-zinc-800 p-4 shadow-2xl'>
       <div className='relative mb-4'>
         <div className='pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3'>
           <Search />

@@ -1,4 +1,4 @@
-import { Logo } from '@/components/icons'
+import { IM, Logo } from '@/components/icons'
 
 export function Header() {
   return (
