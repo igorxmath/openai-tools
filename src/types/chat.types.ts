@@ -1,9 +1,9 @@
-export type ChatGPTMessage = {
+export interface ChatGPTMessage {
   role: 'system' | 'user' | 'assistant'
   content: string
 }
 
-export type ChatGPTRequest = {
+export interface ChatGPTRequest {
   model: string
   messages: ChatGPTMessage[]
   temperature?: number
@@ -18,7 +18,7 @@ export type ChatGPTRequest = {
   user?: string
 }
 
-export type ChatGPTResponse = {
+export interface ChatGPTResponse {
   id: string
   object: string
   created: number

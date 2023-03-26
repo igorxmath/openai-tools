@@ -15,6 +15,10 @@
   "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
 
   "material-icon-theme.folders.associations": {
-    "blog": "content",
+    "blog": "content"
+  },
+
+  "explorer.fileNesting.patterns": {
+    "next.config.*": ".env.*, postcss.config.js, next-env.*, tailwind.config.js, tsconfig.json, .prettierrc.*, .eslintrc.*, .gitignore, README.md"
   }
 }

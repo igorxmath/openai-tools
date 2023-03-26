@@ -9,15 +9,17 @@ export async function POST(request: Request): Promise<NextResponse> {
     return new NextResponse('Server error', { status: 500 })
   }
 
-  const { query } = await request.json()
-  if (!query) {
-    return new NextResponse('No query provided', { status: 400 })
-  }
-  if (query.length > 1024) {
-    return new NextResponse('Query too long', { status: 400 })
+  const { messages }: { messages: ChatGPTMessage[] } = await request.json()
+
+  if (!messages) {
+    return new NextResponse('No message provided', { status: 400 })
   }
 
-  const messages: ChatGPTMessage[] = [{ role: 'user', content: query }]
+  for (const message of messages) {
+    if (!message.content || !message.role) {
+      return new NextResponse('Invalid message', { status: 400 })
+    }
+  }
 
   const payload: ChatGPTRequest = {
     model: 'gpt-3.5-turbo',

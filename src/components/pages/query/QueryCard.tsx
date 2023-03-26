@@ -1,9 +1,17 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { GitHub, Search, Copy } from '@/components/icons'
-import { AIResponse } from '@/components/pages/AIResponse'
+import { Search, Copy } from '@/components/icons'
+import { AIResponse } from '@/components/pages/query/AIResponse'
 
-export function PromptCard({ suggestions }: { suggestions: string[] }) {
+const suggestions = [
+  'How do I get started with Next.js?',
+  'How do I deploy my Next.js app?',
+  'How do I use Tailwind CSS?',
+  'How do I use TypeScript?',
+  'How do I use React?',
+]
+
+export default function QueryCard() {
   const [search, setSearch] = useState<string>('')
   const [message, setMessage] = useState<string>('')
   const [copyState, setCopyState] = useState<boolean>(false)
@@ -40,19 +48,21 @@ export function PromptCard({ suggestions }: { suggestions: string[] }) {
   const handleSuggestions = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const suggestion = event.currentTarget.name
     setSearch(suggestion)
-    handleClick(suggestion)
+    handleSubmit(suggestion)
   }
 
-  const handleClick = async (query: string) => {
+  const handleSubmit = async (query: string) => {
     setLoading(true)
     setMessage(' ')
+
+    const messages = [{ role: 'user', content: query }]
 
     const res = await fetch('/api/chat', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ messages }),
     })
 
     if (!res.ok) {
@@ -104,37 +114,35 @@ export function PromptCard({ suggestions }: { suggestions: string[] }) {
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
-              handleClick(search)
+              handleSubmit(search)
             }
           }}
           required
         />
         <button
           type='submit'
-          className='absolute right-2.5 bottom-2.5 rounded-lg bg-zinc-200 px-4 py-2 text-sm font-bold text-zinc-900 shadow-white transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4'
-          onClick={() => handleClick(search)}
+          className='absolute right-2.5 bottom-2.5 rounded-lg bg-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-900 shadow-white transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4'
+          onClick={() => handleSubmit(search)}
           disabled={loading || remainingTime > 0}
         >
           Search
         </button>
       </div>
       {!message ? (
-        <div className='mb-4 flex flex-col items-center justify-center'>
-          <div className='flex flex-wrap justify-center'>
-            {suggestions.map((suggestion) => (
-              <button
-                key={suggestion}
-                name={suggestion}
-                onClick={handleSuggestions}
-                className='mr-2 mb-2 cursor-pointer rounded-lg bg-zinc-200 px-3 py-1 text-sm font-semibold text-zinc-900 transition-all duration-300 hover:scale-105'
-              >
-                {suggestion}
-              </button>
-            ))}
-          </div>
+        <div className='flex flex-wrap items-center justify-center'>
+          {suggestions.map((suggestion) => (
+            <button
+              key={suggestion}
+              name={suggestion}
+              onClick={handleSuggestions}
+              className='mb-2 mr-2 cursor-pointer rounded-lg bg-zinc-200 px-3 py-1 text-sm font-semibold text-zinc-900 transition-all duration-300 hover:scale-105'
+            >
+              {suggestion}
+            </button>
+          ))}
         </div>
       ) : (
-        <div className='mb-4 rounded-lg bg-zinc-900 p-4 shadow-md'>
+        <div className='rounded-lg bg-zinc-900 p-4 shadow-md'>
           <div className='mb-2 flex'>
             <div className={`${loading && 'loading'} flex space-x-2`}>
               <span className='h-3 w-3 rounded-full bg-red-500'></span>
@@ -168,21 +176,6 @@ export function PromptCard({ suggestions }: { suggestions: string[] }) {
           )}
         </div>
       )}
-
-      <div
-        className='flex border-t border-gray-300 pt-2'
-        ref={messageRef}
-      >
-        <p className='text-zinc-300'>Powered by OpenAI.</p>
-        <a
-          href='https://github.com/igorxmath/openai-tools/'
-          target='_blank'
-          rel='noopener noreferrer'
-          className='ml-auto'
-        >
-          <GitHub className='shadow-white transition-all duration-300 hover:scale-105' />
-        </a>
-      </div>
     </div>
   )
 }
