@@ -12,7 +12,7 @@ export interface CodeProps {
   [key: string]: unknown
 }
 
-export function AIResponse({ message }: { message: string }) {
+export default function AIResponse({ message }: { message: string }) {
   const CodeBlock = ({ inline, className, children, ...props }: CodeProps) => {
     const [isCopied, setIsCopied] = useState(false)
 

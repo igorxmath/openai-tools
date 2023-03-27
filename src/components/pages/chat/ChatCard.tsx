@@ -2,7 +2,9 @@
 import { Send } from '@/components/icons'
 import { ChatGPTMessage } from '@/types/chat.types'
 import { useState, useEffect } from 'react'
-import { AIResponse } from '../query/AIResponse'
+import dynamic from 'next/dynamic'
+
+const AIResponse = dynamic(() => import('../query/AIResponse'))
 
 const msg: ChatGPTMessage[] = [
   {

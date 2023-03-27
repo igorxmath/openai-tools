@@ -1,7 +1,9 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
 import { Search, Copy } from '@/components/icons'
-import { AIResponse } from '@/components/pages/query/AIResponse'
+import dynamic from 'next/dynamic'
+
+const AIResponse = dynamic(() => import('../query/AIResponse'))
 
 const suggestions = [
   'How do I get started with Next.js?',
