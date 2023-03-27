@@ -4,7 +4,7 @@ import { ChatGPTMessage } from '@/types/chat.types'
 import { useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 
-const AIResponse = dynamic(() => import('../query/AIResponse'))
+const AIResponse = dynamic(() => import('../AIResponse'))
 
 const msg: ChatGPTMessage[] = [
   {

@@ -1,9 +1,9 @@
 'use client'
 import { useState, useRef, useEffect } from 'react'
-import { Search, Copy } from '@/components/icons'
+import { Search } from '@/components/icons'
 import dynamic from 'next/dynamic'
 
-const AIResponse = dynamic(() => import('../query/AIResponse'))
+const AIResponse = dynamic(() => import('../AIResponse'))
 
 const suggestions = [
   'How do I get started with Next.js?',
@@ -16,7 +16,6 @@ const suggestions = [
 export default function QueryCard() {
   const [search, setSearch] = useState<string>('')
   const [message, setMessage] = useState<string>('')
-  const [copyState, setCopyState] = useState<boolean>(false)
   const [loading, setLoading] = useState<boolean>(false)
   const [remainingTime, setRemainingTime] = useState<number>(0)
 
@@ -31,15 +30,6 @@ export default function QueryCard() {
       return () => clearInterval(timerId)
     }
   }, [remainingTime])
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(message).then(() => {
-      setCopyState(true)
-      setTimeout(() => {
-        setCopyState(false)
-      }, 3000)
-    })
-  }
 
   const handleScroll = () => {
     if (messageRef.current) {
@@ -150,21 +140,6 @@ export default function QueryCard() {
               <span className='h-3 w-3 rounded-full bg-yellow-500'></span>
               <span className='h-3 w-3 rounded-full bg-green-500'></span>
             </div>
-
-            {!loading && (
-              <div className='group ml-auto'>
-                <button
-                  onClick={handleCopy}
-                  disabled={loading || copyState}
-                  className='shadow-white transition-all duration-300 hover:scale-105'
-                >
-                  <Copy />
-                </button>
-                <span className='absolute ml-1 scale-0 rounded bg-zinc-800 p-2 text-xs text-zinc-300 transition-all duration-300 group-hover:scale-100'>
-                  {copyState ? 'Copied!' : 'Copy'}
-                </span>
-              </div>
-            )}
           </div>
 
           <AIResponse message={message} />
