@@ -1,9 +1,7 @@
 'use client'
 import { useState } from 'react'
-import dynamic from 'next/dynamic'
-
-const QueryCard = dynamic(() => import('./query/QueryCard'))
-const ChatCard = dynamic(() => import('./chat/ChatCard'))
+import QueryCard from '@/components/pages/query/QueryCard'
+import ChatCard from '@/components/pages/chat/ChatCard'
 
 export function SwitchPrompt() {
   const [promptState, setPromptState] = useState<string>('chat')
@@ -35,7 +33,12 @@ export function SwitchPrompt() {
         </button>
       </div>
       <div className='w-full max-w-2xl'>
-        {promptState === 'chat' ? <ChatCard /> : <QueryCard />}
+        <div className={`${promptState === 'chat' ? 'block' : 'hidden'}`}>
+          <ChatCard />
+        </div>
+        <div className={`${promptState === 'search' ? 'block' : 'hidden'}`}>
+          <QueryCard />
+        </div>
       </div>
     </>
   )
