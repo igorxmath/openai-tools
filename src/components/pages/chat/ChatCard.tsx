@@ -19,6 +19,8 @@ export default function ChatCard() {
   const [loading, setLoading] = useState<boolean>(false)
   const [response, setResponse] = useState<string>('')
   const [lastSystemMessageIndex, setLastSystemMessageIndex] = useState<number>(0)
+  const [error, setError] = useState<string | null>(null)
+  const [retryFunction, setRetryFunction] = useState<(() => void) | null>(null)
 
   useEffect(() => {
     if (response) {
@@ -26,7 +28,8 @@ export default function ChatCard() {
       newMessages[lastSystemMessageIndex] = { content: response, role: 'system' }
       setMessages(newMessages)
     }
-  }, [response, messages, lastSystemMessageIndex])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [response])
 
   const handleClick = async () => {
     setLoading(true)
@@ -45,6 +48,8 @@ export default function ChatCard() {
     })
 
     if (!res.ok) {
+      setError(`Something went wrong. ${await res.text()}`)
+      setRetryFunction(() => handleClick)
       setLoading(false)
       return
     }
@@ -65,6 +70,14 @@ export default function ChatCard() {
 
     setResponse('')
     setLoading(false)
+  }
+
+  const handleRetry = () => {
+    if (retryFunction) {
+      setError(null)
+      setRetryFunction(null)
+      retryFunction()
+    }
   }
 
   return (
@@ -89,6 +102,18 @@ export default function ChatCard() {
         ))}
       </div>
       <div className='relative'>
+        {error && (
+          <div className='mb-2 flex items-center justify-between rounded-lg bg-red-600 p-3 text-white'>
+            <span>{error}</span>
+            <button
+              type='button'
+              onClick={handleRetry}
+              className='rounded-lg bg-red-800 px-3 py-1 text-sm font-semibold text-white hover:bg-red-700 focus:outline-none'
+            >
+              Try again
+            </button>
+          </div>
+        )}
         <input
           type='text'
           className='block w-full rounded-lg bg-zinc-900 p-4 text-zinc-300 shadow-white placeholder:text-zinc-400 focus:border-transparent focus:outline-none focus:ring-1 focus:ring-zinc-900'
@@ -96,17 +121,16 @@ export default function ChatCard() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') {
+            if (e.key === 'Enter' && message && !loading && !error) {
               handleClick()
             }
           }}
           required
-          disabled={loading}
         />
         <button
           type='button'
           onClick={handleClick}
-          disabled={loading}
+          disabled={loading || !message || error ? true : false}
           className='absolute right-2.5 bottom-2 rounded-lg bg-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-900 shadow-white transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4'
         >
           <Send />

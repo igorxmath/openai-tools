@@ -68,7 +68,6 @@ export default function QueryCard() {
     })
 
     if (!res.ok) {
-      console.log(res.headers.get('X-RateLimit-Remaining'))
       if (res.headers.get('X-RateLimit-Remaining')) {
         const remaining = res.headers.get('X-RateLimit-Reset')
         const remainingSeconds =
