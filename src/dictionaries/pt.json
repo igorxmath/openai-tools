@@ -1,0 +1,14 @@
+{
+  "header": {
+    "title": "Dicas instantâneas",
+    "subtitle": "O modelo de linguagem mais poderoso do mundo."
+  },
+  "chat": {
+    "initialMessage": "Oi, como posso ajudar?",
+    "error": "Ocorreu um erro. Tente novamente mais tarde.",
+    "placeholder": "Digite sua mensagem..."
+  },
+  "footer": {
+    "by": "Desenvolvido por OpenAI."
+  }
+}

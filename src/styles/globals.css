@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-zinc-900 text-zinc-200;
+  }
+}
+
+@layer utilities {
+  .loading span {
+    @apply mx-0.5 my-0;
+    animation-name: blink;
+    animation-duration: 1.4s;
+    animation-iteration-count: infinite;
+    animation-fill-mode: both;
+  }
+  .loading span:nth-of-type(2) {
+    animation-delay: 0.2s;
+  }
+  .loading span:nth-of-type(3) {
+    animation-delay: 0.4s;
+  }
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0.2;
+  }
+  20% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
