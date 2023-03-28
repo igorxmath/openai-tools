@@ -1,10 +1,11 @@
 'use client'
 import { ChatGPTMessage } from '@/types/chat.types'
 import { useEffect, useRef, useState } from 'react'
-import ChatInput from './ChatInput'
-import ChatMessage from './ChatMessage'
-import ChatError from './ChatError'
-import { DictionarySchema } from '@/types/i18n.types'
+import { type DictionarySchema } from '@/types/i18n.types'
+import style from '@/styles/loadingDots.module.css'
+import ChatInput from '@/components/pages/chat/ChatInput'
+import ChatMessage from '@/components/pages/chat/ChatMessage'
+import ChatError from '@/components/pages/chat/ChatError'
 
 export default function ChatCard({ dictionary }: { dictionary: DictionarySchema }) {
   const initialMessage: ChatGPTMessage[] = [
@@ -82,9 +83,9 @@ export default function ChatCard({ dictionary }: { dictionary: DictionarySchema 
   }
 
   return (
-    <div className='mb-4 flex w-full flex-col rounded-lg border border-zinc-700 bg-zinc-800 p-4'>
+    <div className='mb-4 flex w-full flex-col rounded-lg border border-zinc-700 bg-zinc-900 p-4'>
       <div className='flex flex-1 flex-col overflow-y-auto'>
-        <div className={`${loading && 'loading'} mb-4 flex space-x-2`}>
+        <div className={`${loading && style.loading} mb-4 flex space-x-2`}>
           <span className='h-3 w-3 rounded-full bg-red-500'></span>
           <span className='h-3 w-3 rounded-full bg-yellow-500'></span>
           <span className='h-3 w-3 rounded-full bg-green-500'></span>

@@ -42,7 +42,7 @@ export default function ChatInput({
   return (
     <div className='relative'>
       <textarea
-        className='block w-full resize-none rounded-lg border border-zinc-700 bg-zinc-900 p-4 pr-20 text-zinc-300 shadow-white placeholder:text-zinc-400 focus:border-transparent focus:outline-none focus:ring-1 focus:ring-zinc-900'
+        className='block w-full resize-none rounded-lg border border-zinc-700 bg-zinc-950 p-4 pr-20 text-zinc-300 shadow-white placeholder:text-zinc-400 focus:border-transparent focus:outline-none focus:ring-1 focus:ring-zinc-900'
         placeholder={placeholder}
         ref={textareaRef}
         value={content}

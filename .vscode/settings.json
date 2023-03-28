@@ -19,6 +19,6 @@
   },
 
   "explorer.fileNesting.patterns": {
-    "next.config.*": ".env.*, postcss.config.js, next-env.*, tailwind.config.js, tsconfig.json, .prettierrc.*, .eslintrc.*, .gitignore, README.md"
+    "next.config.*": ".env.*, postcss.config.js, next-env.*, tailwind.config.ts, tsconfig.json, .prettierrc.*, .eslintrc.*, .gitignore, README.md"
   }
 }
