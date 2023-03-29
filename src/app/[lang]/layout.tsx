@@ -22,11 +22,22 @@ export const metadata: Metadata = {
     locale: 'pt-BR',
     images: [
       {
-        url: 'https://ai.igormatheus.com.br/og.jpg',
+        url: 'https://ai.igormatheus.com.br/og.png',
         width: 1200,
         height: 630,
       },
     ],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
