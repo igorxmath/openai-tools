@@ -1,4 +1,4 @@
-export const GitHub = ({ ...props }: { [key: string]: unknown }) => {
+export const GitHub = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       width='24'

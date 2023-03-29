@@ -1,4 +1,4 @@
-export const IM = (props: { [key: string]: unknown }) => (
+export const IM = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     xmlSpace='preserve'

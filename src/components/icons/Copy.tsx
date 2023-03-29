@@ -1,4 +1,4 @@
-export const Copy = ({ ...props }: { [key: string]: unknown }) => {
+export const Copy = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'

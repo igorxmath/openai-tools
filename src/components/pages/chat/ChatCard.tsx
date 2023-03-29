@@ -11,7 +11,7 @@ export default function ChatCard({ dictionary }: { dictionary: DictionarySchema 
   const initialMessage: ChatGPTMessage[] = [
     {
       content: dictionary.chat.initialMessage,
-      role: 'system',
+      role: 'assistant',
     },
   ]
 
@@ -66,7 +66,7 @@ export default function ChatCard({ dictionary }: { dictionary: DictionarySchema 
 
       if (isFirst) {
         isFirst = false
-        setMessages((messages) => [...messages, { role: 'system', content: chunkValue }])
+        setMessages((messages) => [...messages, { role: 'assistant', content: chunkValue }])
       } else {
         setMessages((messages) => {
           const lastMessage = messages[messages.length - 1]

@@ -1,4 +1,4 @@
-export const Search = ({ ...props }: { [key: string]: unknown }) => {
+export const Search = (props: React.SVGProps<SVGSVGElement>) => {
   return (
     <svg
       aria-hidden='true'

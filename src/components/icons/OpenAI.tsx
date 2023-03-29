@@ -1,4 +1,4 @@
-export const OpenAI = (props: { [key: string]: unknown }) => (
+export const OpenAI = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     fill='#fff'
     width={800}
