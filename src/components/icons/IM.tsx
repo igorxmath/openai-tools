@@ -2,8 +2,8 @@ export const IM = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     xmlSpace='preserve'
-    width={85}
-    height={51}
+    width={256}
+    height={160}
     viewBox='0 0 256 160'
     fill='currentColor'
     {...props}
