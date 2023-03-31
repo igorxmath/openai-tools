@@ -1,5 +1,5 @@
 import { GitHub } from '@/components/icons'
-import { Header } from '@/components/pages/Header'
+import { Header } from '@/components/pages/chat/Header'
 import ChatCard from '@/components/pages/chat/ChatCard'
 
 export default async function HomePage() {

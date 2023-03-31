@@ -6,14 +6,14 @@ import ChatInput from '@/components/pages/chat/ChatInput'
 import ChatMessage from '@/components/pages/chat/ChatMessage'
 import ChatError from '@/components/pages/chat/ChatError'
 
-export default function ChatCard() {
-  const initialMessage: ChatGPTMessage[] = [
-    {
-      content: 'Hi, how can I help you?',
-      role: 'assistant',
-    },
-  ]
+const initialMessage: ChatGPTMessage[] = [
+  {
+    content: 'Hi, how can I help you?',
+    role: 'assistant',
+  },
+]
 
+export default function ChatCard() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessage)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
@@ -89,14 +89,16 @@ export default function ChatCard() {
           <span className='h-3 w-3 rounded-full bg-yellow-500'></span>
           <span className='h-3 w-3 rounded-full bg-green-500'></span>
         </div>
-        <div className='flex flex-col'>
-          {messages.map((message, idx) => (
+      </div>
+      <div className='flex flex-col'>
+        {messages &&
+          messages.map((message, idx) => (
             <ChatMessage
               key={`${message.role}-${idx}`}
+              index={idx}
               message={message}
             />
           ))}
-        </div>
       </div>
       {error && (
         <ChatError
