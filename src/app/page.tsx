@@ -17,6 +17,7 @@ export default async function HomePage() {
             target='_blank'
             rel='noopener noreferrer'
             className='ml-auto'
+            aria-label='GitHub'
           >
             <GitHub className='shadow-white transition-all duration-300 hover:scale-105' />
           </a>

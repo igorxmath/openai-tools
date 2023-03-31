@@ -48,6 +48,7 @@ export default function ChatInput({ onSend }: { onSend: (message: ChatGPTMessage
         type='button'
         className='absolute bottom-5 right-2.5 rounded-lg bg-zinc-200 px-4 py-2 text-sm font-semibold text-zinc-900 shadow-white transition-all duration-300 hover:scale-105 focus:outline-none focus:ring-4'
         onClick={handleSend}
+        aria-label='Send'
       >
         <Send />
       </button>
