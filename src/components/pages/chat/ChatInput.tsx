@@ -36,7 +36,7 @@ export default function ChatInput({ onSend }: { onSend: (message: ChatGPTMessage
   return (
     <div className='relative'>
       <textarea
-        className='block w-full resize-none rounded-lg border border-zinc-700 bg-zinc-950 p-4 pr-20 text-zinc-300 shadow-white placeholder:text-zinc-400 focus:border-transparent focus:outline-none focus:ring-1 focus:ring-zinc-900'
+        className='block w-full resize-none overflow-hidden rounded-lg border border-zinc-700 bg-zinc-950 p-4 pr-20 text-zinc-300 shadow-white placeholder:text-zinc-400 focus:border-transparent focus:outline-none focus:ring-1 focus:ring-zinc-900'
         placeholder='Message'
         ref={textareaRef}
         value={content}

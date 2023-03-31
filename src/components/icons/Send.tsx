@@ -3,17 +3,20 @@ export const Send = (props: React.SVGProps<SVGSVGElement>) => (
     xmlns='http://www.w3.org/2000/svg'
     width='24'
     height='24'
-    fill='none'
-    strokeWidth='1.5'
-    color='#000'
     viewBox='0 0 24 24'
+    fill='none'
+    stroke='currentColor'
+    stroke-width='1.5'
+    stroke-linecap='round'
+    stroke-linejoin='round'
     {...props}
   >
-    <path
-      stroke='#000'
-      strokeLinecap='round'
-      strokeLinejoin='round'
-      d='M22 12L3 20l3.563-8L3 4l19 8zM6.5 12H22'
-    />
+    <line
+      x1='22'
+      y1='2'
+      x2='11'
+      y2='13'
+    ></line>
+    <polygon points='22 2 15 22 11 13 2 9 22 2'></polygon>
   </svg>
 )

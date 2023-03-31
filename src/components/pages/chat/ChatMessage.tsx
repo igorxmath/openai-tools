@@ -17,7 +17,7 @@ export function ChatMessage({ index, message }: { index: number; message: ChatGP
     <div
       className={`${
         message.role === 'user'
-          ? 'ml-auto border-black bg-zinc-200 text-right  text-zinc-800'
+          ? 'ml-auto border-black bg-zinc-50 text-right  text-zinc-800'
           : 'mr-auto border-zinc-700 bg-zinc-950 text-left  text-zinc-200'
       } mb-4 rounded-lg border p-4 shadow-white `}
     >
