@@ -2,13 +2,7 @@ import { Send } from '@/components/icons'
 import { ChatGPTMessage } from '@/types/chat.types'
 import { useState, useRef, useEffect } from 'react'
 
-export default function ChatInput({
-  onSend,
-  placeholder,
-}: {
-  onSend: (message: ChatGPTMessage) => void
-  placeholder?: string
-}) {
+export default function ChatInput({ onSend }: { onSend: (message: ChatGPTMessage) => void }) {
   const [content, setContent] = useState<string>('')
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -43,7 +37,7 @@ export default function ChatInput({
     <div className='relative'>
       <textarea
         className='block w-full resize-none rounded-lg border border-zinc-700 bg-zinc-950 p-4 pr-20 text-zinc-300 shadow-white placeholder:text-zinc-400 focus:border-transparent focus:outline-none focus:ring-1 focus:ring-zinc-900'
-        placeholder={placeholder}
+        placeholder='Message'
         ref={textareaRef}
         value={content}
         onChange={handleChange}

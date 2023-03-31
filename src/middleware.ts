@@ -2,9 +2,6 @@ import { NextResponse } from 'next/server'
 import type { NextRequest, NextFetchEvent } from 'next/server'
 import { Redis } from '@upstash/redis'
 import { Ratelimit } from '@upstash/ratelimit'
-import { i18n } from '@/types/i18n.types'
-import { match as matchLocale } from '@formatjs/intl-localematcher'
-import Negotiator from 'negotiator'
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
@@ -12,17 +9,6 @@ const ratelimit = new Ratelimit({
   ephemeralCache: new Map(),
   analytics: true,
 })
-
-function getLocale(request: NextRequest): string | undefined {
-  const negotiatorHeaders: Record<string, string> = {}
-  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
-
-  const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-ignore locales are readonly
-  const locales: string[] = i18n.locales
-  return matchLocale(languages, locales, i18n.defaultLocale)
-}
 
 export default async function middleware(
   request: NextRequest,
@@ -49,18 +35,8 @@ export default async function middleware(
           },
         })
   }
-
-  const pathnameIsMissingLocale = i18n.locales.every(
-    (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`,
-  )
-
-  if (pathnameIsMissingLocale) {
-    const locale = getLocale(request)
-
-    return NextResponse.redirect(new URL(`/${locale}/${pathname}`, request.url))
-  }
 }
 
 export const config = {
-  matcher: ['/api/chat', '/((?!api|_next/static|_next/image|favicon.ico|.*.png|.*.xml).*)'],
+  matcher: ['/api/chat'],
 }

@@ -1,16 +1,15 @@
 'use client'
 import { ChatGPTMessage } from '@/types/chat.types'
 import { useEffect, useRef, useState } from 'react'
-import { type DictionarySchema } from '@/types/i18n.types'
 import style from '@/styles/loadingDots.module.css'
 import ChatInput from '@/components/pages/chat/ChatInput'
 import ChatMessage from '@/components/pages/chat/ChatMessage'
 import ChatError from '@/components/pages/chat/ChatError'
 
-export default function ChatCard({ dictionary }: { dictionary: DictionarySchema }) {
+export default function ChatCard() {
   const initialMessage: ChatGPTMessage[] = [
     {
-      content: dictionary.chat.initialMessage,
+      content: 'Hi, how can I help you?',
       role: 'assistant',
     },
   ]
@@ -46,7 +45,7 @@ export default function ChatCard({ dictionary }: { dictionary: DictionarySchema 
     })
 
     if (!res.ok) {
-      setError(`${dictionary.chat.error} ${await res.text()}`)
+      setError(`Sorry, I'm having trouble understanding you. ${await res.text()}`)
       setLoading(false)
       return
     }
@@ -105,10 +104,7 @@ export default function ChatCard({ dictionary }: { dictionary: DictionarySchema 
           onSend={handleSend}
         />
       )}
-      <ChatInput
-        onSend={handleSend}
-        placeholder={dictionary.chat.placeholder}
-      />
+      <ChatInput onSend={handleSend} />
       <div ref={messagesEndRef} />
     </div>
   )
