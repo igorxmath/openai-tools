@@ -1,15 +1,19 @@
-import { memo } from 'react'
+import { memo, lazy, Suspense } from 'react'
 import { ChatGPTMessage } from '@/types/chat.types'
-import dynamic from 'next/dynamic'
+import Loading from '@/components/pages/chat/Loading'
 
-const AIResponse = dynamic(() => import('./markdown/AIResponse'))
+const MarkdownPreview = lazy(() => import('./markdown/MarkdownPreview'))
 
 export function ChatMessage({ index, message }: { index: number; message: ChatGPTMessage }) {
   const renderAssistantMessage = () => {
     if (index === 0) {
       return message.content
     } else {
-      return <AIResponse message={message.content} />
+      return (
+        <Suspense fallback={<Loading />}>
+          <MarkdownPreview markdown={message.content} />
+        </Suspense>
+      )
     }
   }
 
