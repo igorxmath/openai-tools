@@ -34,7 +34,7 @@ export interface CodeProps {
 }
 
 export const CodeBlock = ({ inline, className, children, ...props }: CodeProps) => {
-  const match = /language-(\w+)/.exec(className || '')
+  const match = /language-(\w+)/.exec(className || '') || ['', 'js']
   const code = String(children).replace(/\n$/, '')
 
   if (!inline && match) {
