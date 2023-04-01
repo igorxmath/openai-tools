@@ -1,16 +1,9 @@
 import { Confirm, Copy } from '@/components/icons'
 import { useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { vscDarkPlus as style } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
-export interface CodeProps {
-  inline?: boolean
-  className?: string
-  children: React.ReactNode
-  [key: string]: unknown
-}
-
-export const CodeBlock = ({ inline, className, children, ...props }: CodeProps) => {
+const CopyButton = ({ code }: { code: string }) => {
   const [isCopied, setIsCopied] = useState(false)
 
   const copyToClipboard = (text: string) => {
@@ -22,26 +15,40 @@ export const CodeBlock = ({ inline, className, children, ...props }: CodeProps) 
     })
   }
 
+  return (
+    <button
+      onClick={() => copyToClipboard(code)}
+      className='absolute right-0 top-0 shadow-white transition-all duration-300 hover:scale-105'
+      disabled={isCopied}
+    >
+      {isCopied ? <Confirm /> : <Copy />}
+    </button>
+  )
+}
+
+export interface CodeProps {
+  inline?: boolean
+  className?: string
+  children: React.ReactNode
+  [key: string]: unknown
+}
+
+export const CodeBlock = ({ inline, className, children, ...props }: CodeProps) => {
   const match = /language-(\w+)/.exec(className || '')
+  const code = String(children).replace(/\n$/, '')
 
   if (!inline && match) {
     return (
       <div style={{ position: 'relative' }}>
-        <button
-          onClick={() => copyToClipboard(String(children).replace(/\n$/, ''))}
-          className='absolute right-0 top-0 shadow-white transition-all duration-300 hover:scale-105'
-          disabled={isCopied}
-        >
-          {isCopied ? <Confirm /> : <Copy />}
-        </button>
+        <CopyButton code={code} />
         <SyntaxHighlighter
-          style={vscDarkPlus}
-          customStyle={{ background: 'transparent', padding: 0 }}
+          style={style}
+          customStyle={{ backgroundColor: 'transparent', padding: 0 }}
           language={match[1]}
           wrapLongLines={true}
           {...props}
         >
-          {String(children).replace(/\n$/, '')}
+          {code}
         </SyntaxHighlighter>
       </div>
     )
