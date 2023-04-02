@@ -1,4 +1,4 @@
-import { Confirm, Copy } from '@/components/icons'
+import { Check, Copy } from '@/components/icons'
 import { useState } from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { vscDarkPlus as style } from 'react-syntax-highlighter/dist/esm/styles/prism'
@@ -21,7 +21,7 @@ const CopyButton = ({ code }: { code: string }) => {
       className='absolute right-0 top-0 shadow-white transition-all duration-300 hover:scale-105'
       disabled={isCopied}
     >
-      {isCopied ? <Confirm /> : <Copy />}
+      {isCopied ? <Check /> : <Copy />}
     </button>
   )
 }

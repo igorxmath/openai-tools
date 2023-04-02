@@ -5,7 +5,7 @@ import ChatCard from '@/components/pages/chat/ChatCard'
 export default async function HomePage() {
   return (
     <div className='flex min-h-screen flex-col'>
-      <main className='container mx-auto flex flex-1 flex-col items-center justify-center p-4'>
+      <main className='container mx-auto flex flex-1 flex-col items-center justify-center p-2'>
         <Header />
         <div className='w-full max-w-3xl'>
           <ChatCard />
