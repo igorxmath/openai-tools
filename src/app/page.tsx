@@ -1,6 +1,6 @@
+import { Header } from '@/components/pages/Header'
 import { GitHub } from '@/components/icons'
-import { Header } from '@/components/pages/chat/Header'
-import ChatCard from '@/components/pages/chat/ChatCard'
+import { ChatCard } from '@/components/pages/chat'
 
 export default async function HomePage() {
   return (

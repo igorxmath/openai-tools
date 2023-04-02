@@ -1,13 +1,7 @@
 import style from '@/styles/loadingDots.module.css'
 import { Clear } from '@/components/icons'
 
-export default function ChatHeader({
-  loading,
-  onClear,
-}: {
-  loading: boolean
-  onClear: () => void
-}) {
+export function ChatHeader({ loading, onClear }: { loading: boolean; onClear: () => void }) {
   return (
     <div className='flex w-full items-center justify-center border-b-2 border-zinc-700 px-4 py-1.5'>
       <div
@@ -25,7 +19,7 @@ export default function ChatHeader({
         <div className='group relative cursor-pointer'>
           <Clear
             onClick={onClear}
-            className='h-6 w-6 transition-all duration-300 hover:scale-110'
+            className='h-6 w-6 text-zinc-950 transition-all duration-300 hover:scale-110'
             data-tooltip='clear'
           />
           <span

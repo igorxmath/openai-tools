@@ -5,7 +5,7 @@ type ChatErrorProps = {
   onSend: (message: ChatGPTMessage | null) => void
 }
 
-export default function ChatError({ error, onSend }: ChatErrorProps) {
+export function ChatError({ error, onSend }: ChatErrorProps) {
   const handleTryAgain = () => {
     onSend(null)
   }

@@ -1,6 +1,5 @@
 export const Clear = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
-    fill='none'
     height='24'
     shapeRendering='geometricPrecision'
     stroke='currentColor'
@@ -11,7 +10,19 @@ export const Clear = (props: React.SVGProps<SVGSVGElement>) => (
     width='24'
     {...props}
   >
-    <path d='M18 6L6 18' />
-    <path d='M6 6l12 12' />
+    <circle
+      cx='12'
+      cy='12'
+      r='10'
+      fill='white'
+    />
+    <path
+      d='M15 9l-6 6'
+      stroke='currentColor'
+    />
+    <path
+      d='M9 9l6 6'
+      stroke='currentColor'
+    />
   </svg>
 )

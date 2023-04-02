@@ -1,8 +1,8 @@
+import { useState, useRef, useEffect } from 'react'
 import { Send } from '@/components/icons'
 import { ChatGPTMessage } from '@/types/chat.types'
-import { useState, useRef, useEffect } from 'react'
 
-export default function ChatInput({ onSend }: { onSend: (message: ChatGPTMessage) => void }) {
+export function ChatInput({ onSend }: { onSend: (message: ChatGPTMessage) => void }) {
   const [content, setContent] = useState<string>('')
 
   const textareaRef = useRef<HTMLTextAreaElement>(null)

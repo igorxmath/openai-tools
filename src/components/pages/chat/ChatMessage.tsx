@@ -14,7 +14,7 @@ function Loading() {
   )
 }
 
-export function ChatMessage({ index, message }: { index: number; message: ChatGPTMessage }) {
+function Message({ index, message }: { index: number; message: ChatGPTMessage }) {
   const renderAssistantMessage = () => {
     if (index === 0) {
       return message.content
@@ -40,4 +40,4 @@ export function ChatMessage({ index, message }: { index: number; message: ChatGP
   )
 }
 
-export default memo(ChatMessage)
+export const ChatMessage = memo(Message)

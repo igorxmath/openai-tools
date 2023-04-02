@@ -1,10 +1,6 @@
-'use client'
 import { useEffect, useRef, useState } from 'react'
+import { ChatHeader, ChatMessage, ChatInput, ChatError } from '@/components/pages/chat'
 import { ChatGPTMessage } from '@/types/chat.types'
-import ChatHeader from '@/components/pages/chat/ChatHeader'
-import ChatMessage from '@/components/pages/chat/ChatMessage'
-import ChatInput from '@/components/pages/chat/ChatInput'
-import ChatError from '@/components/pages/chat/ChatError'
 
 const initialMessage: ChatGPTMessage[] = [
   {
@@ -13,7 +9,7 @@ const initialMessage: ChatGPTMessage[] = [
   },
 ]
 
-export default function ChatCard() {
+export function ChatCard() {
   const [messages, setMessages] = useState<ChatGPTMessage[]>(initialMessage)
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
@@ -82,8 +78,10 @@ export default function ChatCard() {
   }
 
   const clearMessages = () => {
-    console.log(messages.length)
-    if (messages.length !== 1) setMessages(initialMessage)
+    if (messages.length !== 1) {
+      setError('')
+      setMessages(initialMessage)
+    }
   }
 
   return (
