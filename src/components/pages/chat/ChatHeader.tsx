@@ -11,10 +11,10 @@ export function ChatHeader({ loading, onClear }: { loading: boolean; onClear: ()
         <span className='h-3 w-3 rounded-full bg-yellow-500'></span>
         <span className='h-3 w-3 rounded-full bg-green-500'></span>
       </div>
-      <select className='rounded-md border-2 border-zinc-700 bg-zinc-950 text-zinc-200'>
+      {/* <select className='rounded-md border-2 border-zinc-700 bg-zinc-950 text-zinc-200'>
         <option value='gpt-3.5'>GPT-3.5</option>
         <option value='gpt-4'>GPT-4</option>
-      </select>
+      </select> */}
       <div className='flex w-full items-center justify-end space-x-2'>
         <div className='group relative cursor-pointer'>
           <Clear

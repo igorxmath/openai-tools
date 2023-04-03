@@ -5,6 +5,8 @@ import type { Metadata } from 'next'
 
 const inter = Inter({ subsets: ['latin'] })
 
+export const runtime = 'edge'
+
 export const metadata: Metadata = {
   title: 'OpenAi GPT-3 Playground',
   description: 'A playground for OpenAI GPT-3',
