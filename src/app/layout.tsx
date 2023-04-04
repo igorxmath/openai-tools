@@ -12,6 +12,9 @@ export const metadata: Metadata = {
     title: 'OpenAi GPT-3 Playground',
     card: 'summary_large_image',
   },
+  icons: {
+    shortcut: '/favicon.ico',
+  },
   openGraph: {
     title: 'OpenAi GPT-3 Playground',
     siteName: 'OpenAi GPT-3 Playground',

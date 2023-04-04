@@ -17,7 +17,7 @@
     "@vercel/analytics": "^0.1.11",
     "eslint": "8.37.0",
     "eventsource-parser": "^1.0.0",
-    "next": "^13.2.5-canary.28",
+    "next": "^13.2.5-canary.30",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^8.0.5",

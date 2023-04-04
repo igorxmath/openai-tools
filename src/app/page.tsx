@@ -2,6 +2,8 @@ import { Header } from '@/components/pages/Header'
 import { GitHub } from '@/components/icons'
 import { ChatCard } from '@/components/pages/chat'
 
+export const runtime = 'edge'
+
 export default async function HomePage() {
   return (
     <div className='flex min-h-screen flex-col'>
