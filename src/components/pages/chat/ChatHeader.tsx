@@ -1,9 +1,9 @@
-import style from '@/styles/loadingDots.module.css'
 import { Clear } from '@/components/icons'
+import style from '@/styles/loadingDots.module.css'
 
 export function ChatHeader({ loading, onClear }: { loading: boolean; onClear: () => void }) {
   return (
-    <div className='flex w-full items-center justify-center border-b-2 border-zinc-700 px-4 py-1.5'>
+    <div className='flex w-full items-center justify-center border-b-2 border-zinc-800 px-4 py-2'>
       <div
         className={`flex w-full items-center justify-start space-x-2 ${loading && style.loading}`}
       >
@@ -23,7 +23,7 @@ export function ChatHeader({ loading, onClear }: { loading: boolean; onClear: ()
             data-tooltip='clear'
           />
           <span
-            className='absolute -right-4 -top-6 hidden rounded-md bg-zinc-100 px-1 py-0.5 text-xs font-semibold text-zinc-800 group-hover:block'
+            className='absolute -right-2 top-8 hidden rounded-md bg-zinc-100 px-1 py-0.5 text-xs font-semibold text-zinc-800 group-hover:block'
             data-tooltip-target='clear'
           >
             Clear

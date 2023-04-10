@@ -15,7 +15,8 @@
   "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]],
 
   "material-icon-theme.folders.associations": {
-    "dictionaries": "json"
+    "dictionaries": "json",
+    "search": "context"
   },
 
   "explorer.fileNesting.patterns": {

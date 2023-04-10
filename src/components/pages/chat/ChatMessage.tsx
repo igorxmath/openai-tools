@@ -1,15 +1,15 @@
 import style from '@/styles/loadingDots.module.css'
-import { memo, lazy, Suspense } from 'react'
 import { ChatGPTMessage } from '@/types/chat.types'
+import { memo, lazy, Suspense } from 'react'
 
-const MarkdownPreview = lazy(() => import('./markdown/MarkdownPreview'))
+const MarkdownPreview = lazy(() => import('@/components/markdown/MarkdownPreview'))
 
-function Loading() {
+function LoadingDots() {
   return (
     <div className={`${style.loading} flex space-x-2`}>
-      <span className='h-3 w-3 rounded-full bg-zinc-200'></span>
-      <span className='h-3 w-3 rounded-full bg-zinc-200'></span>
-      <span className='h-3 w-3 rounded-full bg-zinc-200'></span>
+      <span className='h-3 w-3 rounded-full bg-zinc-300'></span>
+      <span className='h-3 w-3 rounded-full bg-zinc-300'></span>
+      <span className='h-3 w-3 rounded-full bg-zinc-300'></span>
     </div>
   )
 }
@@ -20,7 +20,7 @@ function Message({ index, message }: { index: number; message: ChatGPTMessage })
       return message.content
     } else {
       return (
-        <Suspense fallback={<Loading />}>
+        <Suspense fallback={<LoadingDots />}>
           <MarkdownPreview markdown={message.content} />
         </Suspense>
       )
@@ -31,9 +31,9 @@ function Message({ index, message }: { index: number; message: ChatGPTMessage })
     <div
       className={`${
         message.role === 'user'
-          ? 'ml-auto border-black bg-zinc-50 text-right  text-zinc-800'
-          : 'mr-auto border-zinc-700 bg-zinc-950 text-left  text-zinc-200'
-      } mb-4 max-w-prose break-words rounded-lg border-2 p-4 shadow-white`}
+          ? 'ml-auto bg-zinc-300 text-right text-zinc-800'
+          : 'mr-auto border-zinc-800 bg-zinc-900 text-left  text-zinc-200'
+      } mb-4 max-w-prose break-words rounded-lg border-2 p-3 shadow-white`}
     >
       {message.role === 'assistant' ? renderAssistantMessage() : message.content}
     </div>

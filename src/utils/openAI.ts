@@ -1,5 +1,5 @@
-import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 import { ChatGPTRequest } from '@/types/chat.types'
+import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 
 export async function OpenAIStream(payload: ChatGPTRequest) {
   const encoder = new TextEncoder()

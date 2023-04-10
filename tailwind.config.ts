@@ -1,6 +1,6 @@
-import type { Config } from 'tailwindcss'
-import typography from '@tailwindcss/typography'
 import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
+import type { Config } from 'tailwindcss'
 
 export default {
   content: ['./src/**/*.{ts,tsx}'],
@@ -29,7 +29,7 @@ export default {
             '--tw-prose-captions': theme('colors.zinc[200]'),
             '--tw-prose-code': theme('colors.zinc[200]'),
             '--tw-prose-pre-code': theme('colors.zinc[100]'),
-            '--tw-prose-pre-bg': theme('colors.zinc[900]'),
+            '--tw-prose-pre-bg': theme('colors.zinc[950]'),
             '--tw-prose-th-borders': theme('colors.zinc[300]'),
             '--tw-prose-td-borders': theme('colors.zinc[200]'),
           },

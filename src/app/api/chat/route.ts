@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
 import { ChatGPTMessage, ChatGPTRequest } from '@/types/chat.types'
 import { OpenAIStream } from '@/utils/openAI'
+import { NextResponse } from 'next/server'
 
 export const runtime = 'edge'
 

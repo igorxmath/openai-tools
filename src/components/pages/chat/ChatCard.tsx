@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
 import { ChatHeader, ChatMessage, ChatInput, ChatError } from '@/components/pages/chat'
 import { ChatGPTMessage } from '@/types/chat.types'
+import { useState, useRef, useEffect } from 'react'
 
 const initialMessage: ChatGPTMessage[] = [
   {
@@ -14,14 +14,10 @@ export function ChatCard() {
   const [loading, setLoading] = useState<boolean>(false)
   const [error, setError] = useState<string>('')
 
-  const messagesEndRef = useRef<HTMLDivElement>(null)
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
-  }
+  const messageEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    scrollToBottom()
+    messageEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
   const handleSend = async (message: ChatGPTMessage | null) => {
@@ -85,12 +81,14 @@ export function ChatCard() {
   }
 
   return (
-    <div className='mb-4 flex w-full flex-col rounded-lg border-2 border-zinc-700 bg-zinc-900'>
-      <ChatHeader
-        loading={loading}
-        onClear={clearMessages}
-      />
-      <div className='p-4'>
+    <div className='flex h-screen flex-col bg-zinc-950'>
+      <div className='flex-none'>
+        <ChatHeader
+          loading={loading}
+          onClear={clearMessages}
+        />
+      </div>
+      <div className='flex-grow overflow-y-auto p-4'>
         <div className='flex flex-col'>
           {messages &&
             messages.map((message, idx) => (
@@ -101,6 +99,9 @@ export function ChatCard() {
               />
             ))}
         </div>
+        <div ref={messageEndRef} />
+      </div>
+      <div className='flex-none bg-transparent p-4'>
         {error && (
           <ChatError
             error={error}
@@ -108,7 +109,6 @@ export function ChatCard() {
           />
         )}
         <ChatInput onSend={handleSend} />
-        <div ref={messagesEndRef} />
       </div>
     </div>
   )

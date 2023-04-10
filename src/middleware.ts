@@ -1,7 +1,7 @@
+import { Ratelimit } from '@upstash/ratelimit'
+import { Redis } from '@upstash/redis'
 import { NextResponse } from 'next/server'
 import type { NextRequest, NextFetchEvent } from 'next/server'
-import { Redis } from '@upstash/redis'
-import { Ratelimit } from '@upstash/ratelimit'
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
@@ -16,7 +16,7 @@ export default async function middleware(
 ): Promise<Response | undefined> {
   const pathname = request.nextUrl.pathname
 
-  if (pathname.startsWith('/api/chat')) {
+  if (pathname.startsWith('/api/chat') || pathname.startsWith('/api/search')) {
     const ip = request.ip ?? '127.0.0.1'
 
     const { success, pending, limit, reset, remaining } = await ratelimit.limit(
@@ -38,5 +38,5 @@ export default async function middleware(
 }
 
 export const config = {
-  matcher: ['/api/chat'],
+  matcher: ['/api/chat', '/api/search'],
 }
