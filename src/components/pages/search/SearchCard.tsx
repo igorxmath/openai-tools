@@ -34,14 +34,12 @@ export function SearchCard() {
     setLoading(true)
     setMessage(' ')
 
-    const messages = [{ role: 'user', content: query }]
-
-    const res = await fetch('/api/chat', {
+    const res = await fetch('/api/search', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ messages }),
+      body: JSON.stringify({ query }),
     })
 
     if (!res.ok) {

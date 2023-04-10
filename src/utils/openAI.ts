@@ -1,13 +1,23 @@
-import { ChatGPTRequest } from '@/types/chat.types'
+import { ChatGPTRequest, CreateCompletionRequest } from '@/types/chat.types'
 import { createParser, ParsedEvent, ReconnectInterval } from 'eventsource-parser'
 
-export async function OpenAIStream(payload: ChatGPTRequest) {
+export async function OpenAIStream(
+  model: 'chatGPT' | 'davinci',
+  payload: ChatGPTRequest | CreateCompletionRequest,
+) {
   const encoder = new TextEncoder()
   const decoder = new TextDecoder()
 
   let counter = 0
 
-  const res = await fetch(`${process.env.OPENAI_ENDPOINT}/chat/completions`, {
+  const modelEndpoint = {
+    davinci: 'completions',
+    chatGPT: 'chat/completions',
+  }
+
+  const endpoint = `${process.env.OPENAI_ENDPOINT}/${modelEndpoint[model]}`
+
+  const res = await fetch(endpoint, {
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,

@@ -27,7 +27,7 @@ export async function POST(request: Request): Promise<NextResponse> {
     stream: true,
   }
 
-  const stream = await OpenAIStream(payload)
+  const stream = await OpenAIStream('chatGPT', payload)
 
   return new NextResponse(stream)
 }
